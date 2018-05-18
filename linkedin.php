@@ -60,7 +60,7 @@ class LinkedIn {
 		$this->access_token = new OAuthConsumer($response_params['oauth_token'], $response_params['oauth_token_secret'], 1);
 	}
 
-	function getProfile($resource = "~")
+	function getProfile($resource = "~ -r_fullprofile")
 	{
 		$profile_url = $this->base_url . "/v1/people/" . $resource;
 		$request = OAuthRequest::from_consumer_and_token($this->consumer, $this->access_token, "GET", $profile_url);
@@ -79,7 +79,7 @@ class LinkedIn {
 
 	function setStatus($status)
 	{
-		$profile_url = $this->base_url . "/v1/people/~";
+		$profile_url = $this->base_url . "/v1/people/~ - r_fullprofile";
 		$status_url = $this->base_url . "/v1/people/~/current-status";
 		echo "Setting status...\n";
 		$xml = "<current-status>" . htmlspecialchars($status, ENT_NOQUOTES, "UTF-8") . "</current-status>";
@@ -92,12 +92,10 @@ class LinkedIn {
 		return $response;
 	}
 
-	# Parameters should be a query string starting with "?"
-	# Example search("?count=10&start=10&company=LinkedIn");
 	function search($parameters)
 	{
 		$search_url = $this->base_url . "/v1/people-search:(people:(id,first-name,last-name,picture-url,site-standard-profile-request,headline),num-results)" . $parameters;
-		//$search_url = $this->base_url . "/v1/people-search?keywords=facebook";
+
 
 		echo "Performing search for: " . $parameters . "<br />";
 		echo "Search URL: $search_url <br />";
