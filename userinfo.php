@@ -39,5 +39,7 @@
     $simplexml = simplexml_load_string($xml_response);
     $json = json_encode($simplexml);
     echo $json;
+    echo "<br>";
+    var_dump( json_decode($json));
     
     
