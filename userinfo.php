@@ -1,10 +1,10 @@
 <?php
     session_start();
 
-    $config['base_url']             =   'http://localhost/kisender/teste/linkedin/authentification.php';
-    $config['callback_url']         =   'http://localhost/kisender/teste/linkedin/userinfo.php';
-    $config['linkedin_access']      =   '77z146pc33jfa0';
-    $config['linkedin_secret']      =   '17nj5zLAIA7iL4Lb';
+    $config['base_url']             =   'base_url';
+    $config['callback_url']         =   'callback_url';
+    $config['linkedin_access']      =   'client_id';
+    $config['linkedin_secret']      =   'client_secret';
     //$config['scope']                =   'r_fullprofile';
 
     include_once "linkedin.php";
