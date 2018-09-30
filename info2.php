@@ -1,8 +1,8 @@
 <?php
 $config = include(dirname(__FILE__).'/config.php');
 // Change these
-define('API_KEY',      $config['77z146pc33jfa0']);
-define('API_SECRET',   $config['17nj5zLAIA7iL4Lb']);
+define('API_KEY',      $config['API_KEY']);
+define('API_SECRET',   $config['API_SECRET']);
 define('REDIRECT_URI', ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on")?'https':'http').'://' . $_SERVER['SERVER_NAME'] . $_SERVER['SCRIPT_NAME']);
 define('SCOPE',        'rw_company_admin r_emailaddress w_share'                        );
  
@@ -35,16 +35,16 @@ if (isset($_GET['error'])) {
     }
 }
  
-// Congratulations! You have a valid token. Now fetch your profile 
-//$user = fetch('GET', '/v1/people/~:(id,first-name,last-name,headline,email-address,picture-url,industry,site-standard-profile-request,interests,summary,main-address,phone-numbers,skills:(skill))');
-var_dump($user);die;
+// if token is valid
+$user = fetch('GET', '/v1/people/~:(id,first-name,last-name,headline,email-address,picture-url,industry,site-standard-profile-request,interests,summary,main-address,phone-numbers,skills:(skill))');
+
  
 function getAuthorizationCode() {
     $params = array('response_type' => 'code',
-                    'client_id' => '77z146pc33jfa0',
+                    'client_id' => 'YOUR_CLIENT_ID',
                     'scope' => SCOPE,
                     'state' => uniqid('', true), // unique long string
-                    'redirect_uri' => 'http://localhost/kisender/teste/linkedin/userinfo.php',
+                    'redirect_uri' => 'redirect_URI',
               );
  
     // Authentication request
@@ -60,10 +60,10 @@ function getAuthorizationCode() {
  
 function getAccessToken() {
     $params = array('grant_type' => 'authorization_code',
-                    'client_id' => '77z146pc33jfa0',
-                    'client_secret' => '17nj5zLAIA7iL4Lb',
+                    'client_id' => 'client_ID',
+                    'client_secret' => 'client_secret',
                     'code' => $_GET['code'],
-                    'redirect_uri' => 'http://localhost/kisender/teste/linkedin/userinfo.php',
+                    'redirect_uri' => 'redirect_uri',
               );
  
     // Access Token request
